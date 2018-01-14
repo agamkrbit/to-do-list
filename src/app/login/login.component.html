@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h3>Login</h3>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container"
+     fxLayout = "column"
+     fxLayoutGap = "row"
+     fxLayoutAlign="space-around center">
+    <mat-card fxFlex class="sheet">
+        <br>
+        <br>
+        <mat-card-content>
+            <mat-list fxLayout="column" fxLayoutAlign="center center">
+                <mat-list-item fxFlex>
+                    <span class="fa fa-lock fa-5x"></span>
+                </mat-list-item>
+                <br>
+                <mat-list-item fxFlex>
+                    <button mat-button class="background-primary-dark text-floral-white" (click)="loginWithGoogle()"><i class="fa fa-google"></i><span>&nbsp;Login with Google</span></button>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <br>
+        <br>
+    </mat-card>
+</div>

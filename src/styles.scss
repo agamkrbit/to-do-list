@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+$primary-dark : #262f63;
+$primary: #2b3777;
+
+
+body{
+    background-color: #dae6dbd7;
+}
+.container{
+    margin: 20px;
+    display: flex;
+}
+.sheet{
+    height: 700px;
+    width: 400px;
+}
+
+.background-primary-dark{
+    background-color: $primary-dark!important;
+}
+
+.text-floral-white{
+    color: floralwhite!important;
+}
+.flex-space{
+    flex: 1 1 auto;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+

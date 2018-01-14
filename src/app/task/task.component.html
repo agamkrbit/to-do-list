@@ -1,0 +1,45 @@
+<mat-selection-list #selectedTodos>
+<mat-tab-group>
+  <mat-tab label="All Tasks">
+          <mat-list-option *ngFor="let todo of toDos" [value]="todo.id">
+            <p matLine>
+              <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{todo.message}}
+              <mat-chip color="{{prioritiesColor[todo.priorty]}}" selected="{{todo.priorty != 'Low'}}" style="padding:10px">{{todo.priorty}}</mat-chip>
+              <mat-chip *ngIf="todo.status == 'Done'" color="warn" selected="true" style="padding:10px; Background-color: green!important;">Done</mat-chip>
+            </p>
+          </mat-list-option>
+  </mat-tab>
+  <mat-tab label="Done Tasks">
+          <mat-list-option *ngFor="let todo of filterDone(toDos)" [value]="todo.id">
+            <p matLine>
+              <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{todo.message}}
+              <mat-chip color="{{prioritiesColor[todo.priorty]}}" selected="{{todo.priorty != 'Low'}}" style="padding:10px">{{todo.priorty}}</mat-chip>
+              <mat-chip *ngIf="todo.status == 'Done'" color="warn" selected="true" style="padding:10px; Background-color: green!important;">Done</mat-chip>
+            </p>
+          </mat-list-option>
+  </mat-tab>
+  <mat-tab label="Not Done Tasks">
+          <mat-list-option *ngFor="let todo of filterUnDone(toDos)" [value]="todo.id">
+            <p matLine>
+              <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{todo.message}}
+              <mat-chip color="{{prioritiesColor[todo.priorty]}}" selected="{{todo.priorty != 'Low'}}" style="padding:10px">{{todo.priorty}}</mat-chip>
+              <mat-chip *ngIf="todo.status == 'Done'" color="warn" selected="true" style="padding:10px; Background-color: green!important;">Done</mat-chip>
+            </p>
+          </mat-list-option>
+  </mat-tab>
+</mat-tab-group>
+</mat-selection-list>
+<div 
+  fxLayout = "row" 
+  fxLayoutAlign = "right center" 
+  fxLayoutGap ="10px"
+  style="margin-top: 10px">
+  <button mat-button 
+    class="background-primary-dark text-floral-white"
+    [disabled]="!selectedTodos.selectedOptions.selected.length"
+    *ngFor="let status of taskStatus" (click)="statusChange(selectedTodos.selectedOptions.selected, status); selectedTodos.deselectAll();">{{status}}</button>
+    <button mat-button 
+    class="background-primary-dark text-floral-white"
+    [disabled]="!selectedTodos.selectedOptions.selected.length"
+    (click)="delete(selectedTodos.selectedOptions.selected); selectedTodos.deselectAll();">Delete Task</button>
+</div>

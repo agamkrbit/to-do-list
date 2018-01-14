@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row" fxLayoutGap="10px">
+      <h3 fxFlex>To-do-list</h3>
+      <span fxFlex class="flex-spacer"></span>
+      <span>Hi, {{user.displayName}}</span>
+      <span [matMenuTriggerFor]="menu"><img src="{{user.photoURL}}" class="avatar"></span>
+      <mat-menu #menu="matMenu" xPosition="before" yPosition="below" class="background-primary-dark text-floral-white">
+            <button fxFlex mat-menu-item (click)="logout()"><i class="fa fa-sign-out"></i>{{' '}}Logout</button>
+      </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container"
+   fxLayout = "column"
+   fxLayoutGap = "10px"
+   fxLayoutAlign="space-around center">
+   <mat-card fxFlex fxFlexFill>
+       <mat-card-content>
+                   <form novalidate (ngSubmit)="onSubmit()" [formGroup] = "todoForm" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+                    <mat-form-field fxFlex="70" dividerColor="{{ todoError.message != '' ? 'warn' : 'primary'}}">
+                        <input matInput formControlName="message" placeholder="Task">
+                        <mat-hint>
+                            <span [hidden]="!todoError.message">
+                                {{todoError.message}}
+                            </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="20" dividerColor="{{ todoError.message != '' ? 'warn' : 'primary'}}">
+                        <mat-select matInput formControlName="priorty" placeholder="Priorty">
+                            <mat-option *ngFor="let level of priorites" [value]="level">
+                                {{ level }}
+                            </mat-option>
+                            <mat-hint>
+                                <span [hidden]="!todoError.priorty">
+                                    {{todoError.priorty}}
+                                </span>
+                            </mat-hint>
+                        </mat-select>
+                    </mat-form-field>
+                    <div fxFlex="10">
+                            <button 
+                                [disabled]="!todoForm.valid" 
+                                mat-button type="submit" 
+                                class="background-primary-dark text-floral-white">Add Task</button>
+                    </div>
+                   </form>
+       </mat-card-content>
+   </mat-card>
+</div>
+<div class="container"
+   fxLayout = "column"
+   fxLayoutGap = "row"
+   fxLayoutAlign="space-around center"
+   *ngIf="toDos.length">
+   <mat-card fxFlex fxFill>
+       <mat-card-content>
+            <app-task [toDos]="toDos"></app-task>
+       </mat-card-content>
+   </mat-card>
+</div>
